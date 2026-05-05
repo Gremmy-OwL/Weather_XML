@@ -1,6 +1,6 @@
 ''''
 Author: Gremmy OwL
-Version: 0.0.4 B
+Version: 0.0.5 B
 Description: Pull XML files
 '''
 #Imports
@@ -31,7 +31,8 @@ def display():
     root.resizable(False, False)    
 
     #Styles
-    '''For later use'''
+    titleFont = ttk.Style()
+    titleFont.configure('tFont.TLabel', font = (12))
 
     #Tk Variables
     cloudpil = Image.open(cloudpng)
@@ -42,17 +43,19 @@ def display():
     baseFrame = ttk.Frame(root, padding = (10, 5, 10, 5), relief = 'raised', width = 480, height = 270)
 
     #Grid Frames in baseFrame
-    bfgFrame00 = ttk.Frame(baseFrame, relief = 'sunken', width = 85, height = 30)
+    bfgFrame00 = ttk.Frame(baseFrame, width = 80, height = 30)
     bfgFrame10 = ttk.Frame(baseFrame, relief = 'sunken', width = 30, height = 30)
     bfgFrame20 = ttk.Frame(baseFrame, relief = 'sunken', width = 230, height = 30)
     bfgFrame30 = ttk.Frame(baseFrame, relief = 'sunken', width = 30, height = 30)
-    bfgFrame40 = ttk.Frame(baseFrame, relief = 'sunken', width = 85, height = 30)
+    bfgFrame40 = ttk.Frame(baseFrame, width = 80, height = 30)
 
     bfgFrame01 = ttk.Frame(baseFrame, relief = 'sunken', width = 460, height = 230)
 
     #Widgets
         #Labels
-
+    cloud_label0 = ttk.Label(bfgFrame10, image = cloudPNGtk)
+    cloud_label1 = ttk.Label(bfgFrame30, image = cloudPNGtk)
+    bigTitle = ttk.Label(bfgFrame20, text = 'Weather XML Grabber', font = 'tFont.TLabel', width = 20, anchor = CENTER)
         #Buttons
 
         #Entry Fields
@@ -71,7 +74,9 @@ def display():
 
     #Place Widgets
         #Place Labels
-
+    cloud_label0.grid(column = 0, row = 0)
+    cloud_label1.grid(column = 0, row = 0)
+    bigTitle.grid(column = 0, row = 0, sticky = (N))
         #Place Buttons
 
         #Place Entry Fields
