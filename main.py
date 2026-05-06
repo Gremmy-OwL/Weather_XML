@@ -28,11 +28,14 @@ def display():
     root.iconbitmap(cloudico)   #Set icon as cloud icon
     root.title('Weather XML Grabber')   #Set window title
     root.geometry('480x270')
-    root.resizable(False, False)    
+    #root.resizable(False, False)    
 
     #Styles
     titleFont = ttk.Style()
     titleFont.configure('tFont.TLabel', font = (12))
+
+    bigButton = ttk.Style()
+    bigButton.configure('bButton.TButton', font = (10))
 
     #Tk Variables
     cloudpil = Image.open(cloudpng)
@@ -57,7 +60,7 @@ def display():
     Frame01g20 = ttk.Frame(bfgFrame01, relief = 'raised', width = 72, height = 19)
     Frame01g21 = ttk.Frame(bfgFrame01, relief = 'raised', width = 65, height = 19)
     Frame01g22 = ttk.Frame(bfgFrame01, relief = 'raised', width = 65, height = 19)
-    Frame01g32 = ttk.Frame(bfgFrame01, relief = 'raised', width = 65, height = 19)
+    Frame01g23 = ttk.Frame(bfgFrame01, relief = 'raised', width = 65, height = 19)
 
     Frame01g01 = ttk.Frame(bfgFrame01, relief = 'raised', width = 60, height = 31)
     Frame01g02 = ttk.Frame(bfgFrame01, relief = 'raised', width = 90, height = 185)
@@ -73,7 +76,7 @@ def display():
 
         #Buttons
     saveB = ttk.Button(Frame01g21, text = 'Save As')
-    updateB = ttk.Button(Frame01g02, text = 'Update')
+    updateB = ttk.Button(Frame01g02, text = 'Update', width = 20, style = 'bButton.TButton')
 
         #Entry Fields
     xmlSiteField = ttk.Entry(Frame01g10, width = 48)
@@ -96,12 +99,12 @@ def display():
     Frame01g11.grid(column = 1, row = 1)
     Frame01g20.grid(column = 2, row = 0)
     Frame01g21.grid(column = 2, row = 1)
-    Frame01g22.grid(column = 2, row = 2)
-    Frame01g33.grid(column = 3, row = 3)
+    #Frame01g22.grid(column = 2, row = 2)
+    #Frame01g23.grid(column = 0, row = 3)
 
     Frame01g01.grid(column = 0, row = 1)
-    Frame01g02.grid(column = 0, row = 2)
-    Frame01g12.grid(column = 1, row = 2, columnspan = 2)
+    Frame01g02.grid(column = 0, row = 2, columnspan = 3)
+    #Frame01g12.grid(column = 1, row = 2, columnspan = 2)
 
     #Place Widgets
         #Place Labels
@@ -112,7 +115,7 @@ def display():
     destLabel.grid(column = 0, row = 0, sticky = (N, W))
         #Place Buttons
     saveB.grid(column = 0, row = 0)
-    updateB.grid(column = 0, row = 0, columnspan = 2)
+    updateB.grid(column = 0, row = 0, columnspan = 3)
 
         #Place Entry Fields
     xmlSiteField.grid(column = 0, row = 0, sticky = (W))
