@@ -1,6 +1,6 @@
 ''''
 Author: Gremmy OwL
-Version: 0.0.8 B
+Version: 0.0.9 B
 Description: Pull XML files
 '''
 #Imports
@@ -26,6 +26,12 @@ def getDir():
     save_dir = os.path.normpath(filedialog.askdirectory(title = 'Select a Location') + '\weather.xml')
 
     return save_dir
+
+def getXML(site):
+    global response
+    response = requests.get(site)
+
+    return response
 
 def display():
 
