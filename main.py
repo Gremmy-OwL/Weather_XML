@@ -1,6 +1,6 @@
 ''''
 Author: Gremmy OwL
-Version: 0.0.7 B
+Version: 0.0.8 B
 Description: Pull XML files
 '''
 #Imports
@@ -11,7 +11,7 @@ from tkinter import font as tkfont
 from PIL import Image
 from PIL import ImageTk
 from time import sleep
-import requests, os
+import requests, os, threading
 
 #Variables
 save_path = 'weather.xml'
@@ -21,6 +21,12 @@ cloudico = os.path.normpath('Assets\Images\cloud.ico')
 #Functions
 
 #GUI Function
+def getDir():
+    global save_dir
+    save_dir = os.path.normpath(filedialog.askdirectory(title = 'Select a Location') + '\weather.xml')
+
+    return save_dir
+
 def display():
 
     #Tkinter window
