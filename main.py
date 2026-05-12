@@ -1,6 +1,6 @@
 ''''
 Author: Gremmy OwL
-Version: 0.2.2 B
+Version: 0.8.4 B
 Description: Pull XML files
 '''
 #Imports
@@ -50,7 +50,7 @@ def display():
 
         return 0
     
-    def witeXML():
+    def writeXML():
         global save_dir
         global site
 
@@ -65,6 +65,48 @@ def display():
         else:
             return response.status_code
         
+        return 0
+    
+    def stopUpdate():
+        global mUpdate
+        mUpdate = True
+
+        return 0
+    
+    def startUpdate():
+        global waitTime
+        global threads
+        threads = []
+
+        waitTime = int(updateSpin.get())
+
+        if waitTime < 5:
+            waitTime = 5
+        else:
+            pass
+
+        if manualCheck.state():
+            return 0
+        else:
+            if len(threads) == 0:
+                thread = threading.Thread(target = lambda : updateCyl(waitTime))
+                threads.append(thread)
+                thread.start()
+            else:
+                pass
+        return 1
+    
+    def updateCyl(sleep_time):
+        while True:
+            if manualCheck.state():
+                break
+            else:
+                try:
+                    writeXML()
+                except:
+                    pass
+
+                sleep(sleep_time)
         return 0
 
     #Tkinter window
@@ -92,8 +134,12 @@ def display():
     cloud_resize = cloudpil.resize((30, 30))
     cloudPNGtk = ImageTk.PhotoImage(cloud_resize)
 
+    save_path = StringVar(value = 'weather.xml')
+
     mUpdate = BooleanVar(value = True)
     updateInt = StringVar(value = '30')
+
+    DEFAULT_WEATHER_XML = StringVar(value = 'https://forecast.weather.gov/xml/current_obs/KHYS.xml')
 
     #Frames
     baseFrame = ttk.Frame(root, padding = (10, 5, 10, 5), relief = 'raised', width = 480, height = 270)
@@ -138,15 +184,15 @@ def display():
     mUpLabel = ttk.Label(frame1f, text = 'Manual Update')
 
         #Buttons
-    startB = ttk.Button(frame0, text = '\nStart\n', width = 18, style = 'St.TButton')
-    stopB = ttk.Button(frame0, text = '\nStop\n', width = 18, style = 'Sp.TButton')
-    saveB = ttk.Button(frame2e, text = 'Save As')
-    updateB = ttk.Button(frame3a, text = '\nUpdate\n', width = 77)
+    startB = ttk.Button(frame0, text = '\nStart\n', width = 18, style = 'St.TButton', command = startUpdate)
+    stopB = ttk.Button(frame0, text = '\nStop\n', width = 18, style = 'Sp.TButton', command = lambda : manualCheck.state(['selected']))
+    saveB = ttk.Button(frame2e, text = 'Save As', command = saveCommand)
+    updateB = ttk.Button(frame3a, text = '\nUpdate\n', width = 77, command = writeXML)
     manualCheck = ttk.Checkbutton(frame1e, variable = mUpdate, onvalue = True, offvalue = False)
 
         #Entry Fields
-    xmlSiteField = ttk.Entry(frame2b, width = 48)
-    xmlDestField = ttk.Entry(frame2d, width = 48)
+    xmlSiteField = ttk.Entry(frame2b, width = 48, textvariable = DEFAULT_WEATHER_XML)
+    xmlDestField = ttk.Entry(frame2d, width = 48, textvariable = save_path)
     updateSpin = ttk.Spinbox(frame1b, from_ = 5, to = 1800, width = 4, textvariable = updateInt)
 
     #Place Frames
