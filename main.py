@@ -1,6 +1,6 @@
 ''''
 Author: Gremmy OwL
-Version: 0.1.2 B
+Version: 0.2.2 B
 Description: Pull XML files
 '''
 #Imports
