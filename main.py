@@ -1,6 +1,6 @@
 ''''
 Author: Gremmy OwL
-Version: 0.0.9 B
+Version: 0.1.2 B
 Description: Pull XML files
 '''
 #Imports
@@ -34,6 +34,38 @@ def getXML(site):
     return response
 
 def display():
+
+    #Display specific Functions
+    def siteCommand():
+        global site
+        site = xmlSiteField.get()
+
+        return site
+    
+    def saveCommand():
+        global save_dir
+        save_dir = getDir()
+        xmlDestField.delete(0, 'end')
+        xmlDestField.insert(0, save_dir)
+
+        return 0
+    
+    def witeXML():
+        global save_dir
+        global site
+
+        site = siteCommand()
+        save_dir = xmlDestField.get()
+        response = getXML(site)
+
+        if response.status_code == 200:
+            with open(save_dir, 'w') as f:
+                f.write(response.text)
+            return 0
+        else:
+            return response.status_code
+        
+        return 0
 
     #Tkinter window
     root = Tk()
