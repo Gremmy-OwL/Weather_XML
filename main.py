@@ -1,6 +1,6 @@
 ''''
 Author: Gremmy OwL
-Version: 0.0.6 B
+Version: 0.0.7 B
 Description: Pull XML files
 '''
 #Imports
@@ -76,7 +76,7 @@ def display():
 
         #Buttons
     saveB = ttk.Button(Frame01g21, text = 'Save As')
-    updateB = ttk.Button(Frame01g02, text = 'Update', width = 20, style = 'bButton.TButton')
+    updateB = ttk.Button(Frame01g02, text = 'Update', width = 48, style = 'bButton.TButton')
 
         #Entry Fields
     xmlSiteField = ttk.Entry(Frame01g10, width = 48)
